@@ -9,6 +9,9 @@ const app = express();
 //Conectar ao Banco
 mongoose.connect('mongodb+srv://belloinfo:323327@nodeapi-zgtpw.gcp.mongodb.net/test?retryWrites=true&w=majority');
 
+//Carrega os Models
+const Product = require('./models/product-model')
+
 //Carregar as Rotas
 const indexRoute = require('./routes/index-route');
 const productRoute = require('./routes/product-route');
