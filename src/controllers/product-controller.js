@@ -13,7 +13,16 @@ exports.get = (request, response, next) => {
 };
 
 exports.getBySlug = (request, response, next) => {
-	Product.findOne({ slug: request.params.slug, active: true }, "title description slug price slug tags")
+	Product.findOne({ slug: request.params.slug, active: true }, "title description price slug tags")
+		.then(data => {
+			response.status(200).send(data);
+		}).catch(e => {
+			response.status(400).send(e);
+		});
+};
+
+exports.getByTag = (request, response, next) => {
+	Product.find({ tags: request.params.tag, active: true }, "title description price slug tags")
 		.then(data => {
 			response.status(200).send(data);
 		}).catch(e => {
@@ -29,6 +38,8 @@ exports.getById = (request, response, next) => {
 			response.status(400).send(e);
 		});
 };
+
+
 
 exports.post = (request, response, next) => {
 	var product = new Product();
