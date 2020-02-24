@@ -69,7 +69,7 @@ exports.put = (request, response, next) => {
 			tags: request.body.tags
 		}
 	})
-		.then(data => {
+		.then(x => {
 			response.status(200).send({ message: 'Produto atualizado com sucesso!' });
 		}).catch(e => {
 			response.status(400).send({ message: 'Falha ao atualizar o produto', data: e });
@@ -78,5 +78,11 @@ exports.put = (request, response, next) => {
 };
 
 exports.delete = (request, response, next) => {
-	response.status(200).send(request.body);
+	Product.findByIdAndDelete(request.body.id)
+		.then(x => {
+			response.status(200).send({ message: 'Produto deletado com sucesso!' });
+		}).catch(e => {
+			response.status(400).send({ message: 'Falha ao deletar o produto', data: e });
+		});
+
 };
