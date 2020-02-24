@@ -21,6 +21,15 @@ exports.getBySlug = (request, response, next) => {
 		});
 };
 
+exports.getById = (request, response, next) => {
+	Product.findById(request.params.id)
+		.then(data => {
+			response.status(200).send(data);
+		}).catch(e => {
+			response.status(400).send(e);
+		});
+};
+
 exports.post = (request, response, next) => {
 	var product = new Product();
 	product.title = request.body.title;
