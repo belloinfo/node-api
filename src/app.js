@@ -4,13 +4,14 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 
+
 const app = express();
 
 //Conectar ao Banco
-mongoose.connect('mongodb+srv://belloinfo:323327@nodeapi-zgtpw.gcp.mongodb.net/test?retryWrites=true&w=majority');
+mongoose.connect('mongodb+srv://belloinfo:323327@nodeapi-zgtpw.gcp.mongodb.net/loja?retryWrites=true&w=majority');
 
 //Carrega os Models
-const Product = require('./models/product-model')
+const Product = require('./models/product-model');
 
 //Carregar as Rotas
 const indexRoute = require('./routes/index-route');
