@@ -12,6 +12,8 @@ mongoose.connect('mongodb+srv://belloinfo:323327@nodeapi-zgtpw.gcp.mongodb.net/l
 
 //Carrega os Models
 const Product = require('./models/product-model');
+const Customer = require('./models/customer');
+const Order = require('./models/order');
 
 //Carregar as Rotas
 const indexRoute = require('./routes/index-route');
