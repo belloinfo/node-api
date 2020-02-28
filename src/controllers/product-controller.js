@@ -51,7 +51,7 @@ exports.getById = async (request, response, next) => {
 exports.post = async (request, response, next) => {
 	let contract = new ValidationContract();
 	contract.hasMinLen(request.body.title, 3, 'o Titulo deve conter pelo menos 3 caracteres');
-	contract.isRequired(request.body.title, 'o Titulo não esta em branco');
+	contract.isRequired(request.body.title, 'o Titulo não pode esta em branco');
 	contract.hasMinLen(request.body.slug, 3, 'o slug deve conter pelo menos 3 caracteres');
 	contract.hasMinLen(request.body.description, 3, 'o description deve conter pelo menos 3 caracteres');
 	contract.hasMinLen(request.body.tags, 3, 'o tags deve conter pelo menos 3 Informações');
@@ -73,21 +73,21 @@ exports.post = async (request, response, next) => {
 };
 
 exports.put = async (request, response, next) => {
-	
+
 	try {
-			await repository.update(request.params.id, request.body);			
-			response.status(200).send({ message: 'Produto atualizado com sucesso!' });
-		} catch (e) {
-			response.status(500).send({ message: 'Falha ao atualizar o produto', data: e });
-		}	
+		await repository.update(request.params.id, request.body);
+		response.status(200).send({ message: 'Produto atualizado com sucesso!' });
+	} catch (e) {
+		response.status(500).send({ message: 'Falha ao atualizar o produto', data: e });
+	}
 };
 
 exports.delete = async (request, response, next) => {
-	
+
 	try {
-			await repository.delete(request.body.id);
-			response.status(201).send({ message: 'Produto deletado com sucesso!' });
-		} catch (e) {
-			response.status(500).send({ message: 'Falha ao deletar o produto', data: e });
-		}
+		await repository.delete(request.body.id);
+		response.status(201).send({ message: 'Produto deletado com sucesso!' });
+	} catch (e) {
+		response.status(500).send({ message: 'Falha ao deletar o produto', data: e });
+	}
 };
