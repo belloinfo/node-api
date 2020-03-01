@@ -2,6 +2,7 @@
 
 const ValidationContract = require('../validators/fluent-validator');
 const repository = require('../repositories/customer-repository');
+const md5 = require('md5');
 
 exports.get = async (request, response, next) => {
 
@@ -29,7 +30,12 @@ exports.post = async (request, response, next) => {
 	}
 
 	try {
-		await repository.create(request.body);
+		await repository.create({
+			name: request.body.name,
+			email: request.body.email,
+			password: md5(request.body.password + global.SALT_KEY)
+
+		});
 		response.status(201).send({ message: 'Cliente cadastrado com sucesso!' });
 	} catch (e) {
 		response.status(500).send({ message: 'Falha ao cadastrar o Cliente', data: e });
