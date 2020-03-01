@@ -3,6 +3,7 @@
 const ValidationContract = require('../validators/fluent-validator');
 const repository = require('../repositories/customer-repository');
 const md5 = require('md5');
+const emailService = require('../services/email-service');
 
 exports.get = async (request, response, next) => {
 
@@ -36,6 +37,9 @@ exports.post = async (request, response, next) => {
 			password: md5(request.body.password + global.SALT_KEY)
 
 		});
+
+		emailService.send(request.body.email, 'Bem vindo ao NodeApi', global.EMAIL_TMPL.replace('{0}', request.body.name));
+
 		response.status(201).send({ message: 'Cliente cadastrado com sucesso!' });
 	} catch (e) {
 		response.status(500).send({ message: 'Falha ao cadastrar o Cliente', data: e });
