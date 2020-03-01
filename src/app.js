@@ -12,13 +12,14 @@ mongoose.connect('mongodb+srv://belloinfo:323327@nodeapi-zgtpw.gcp.mongodb.net/l
 
 //Carrega os Models
 const Product = require('./models/product-model');
-const Customer = require('./models/customer');
-const Order = require('./models/order');
+const Customer = require('./models/customer-model');
+const Order = require('./models/order-model');
 
 //Carregar as Rotas
 const indexRoute = require('./routes/index-route');
 const productRoute = require('./routes/product-route');
-const customerRoute = require('./routes/customer-router');
+const customerRoute = require('./routes/customer-route');
+const orderRoute = require('./routes/order-route');
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -26,5 +27,6 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use('/', indexRoute);
 app.use('/products', productRoute);
 app.use('/customers', customerRoute);
+app.use('/orders', orderRoute);
 
 module.exports = app; //exportar a app

@@ -3,6 +3,18 @@
 const ValidationContract = require('../validators/fluent-validator');
 const repository = require('../repositories/customer-repository');
 
+exports.get = async (request, response, next) => {
+
+	try {
+		var data = await repository.get();
+		response.status(200).send(data);
+	} catch (e) {
+		response.status(500).send({
+			message: 'Falha ao processar sua requisição'
+		});
+	}
+};
+
 exports.post = async (request, response, next) => {
 	let contract = new ValidationContract();
 	contract.hasMinLen(request.body.name, 3, 'o Nome deve conter pelo menos 3 caracteres');
