@@ -4,11 +4,11 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 
-
+const config = require('./config');
 const app = express();
 
 //Conectar ao Banco
-mongoose.connect('mongodb+srv://belloinfo:323327@nodeapi-zgtpw.gcp.mongodb.net/loja?retryWrites=true&w=majority');
+mongoose.connect(config.connectionString);
 
 //Carrega os Models
 const Product = require('./models/product-model');
